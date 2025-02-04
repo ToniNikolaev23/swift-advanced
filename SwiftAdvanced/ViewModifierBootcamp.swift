@@ -8,32 +8,40 @@
 import SwiftUI
 
 struct DefaultButtonViewModifier: ViewModifier {
+    
+    let backgroundColor: Color
+    
     func body(content: Content) -> some View {
         content
-            .font(.headline)
             .foregroundStyle(.white)
             .frame(height: 55)
             .frame(maxWidth: .infinity)
-            .background(Color.blue)
+            .background(backgroundColor)
             .cornerRadius(10)
             .shadow(radius: 10)
-            .padding()
     }
 }
 
 extension View {
-    public func withDefaultButtonFormatting() -> some View {
-        modifier(DefaultButtonViewModifier())
+    public func withDefaultButtonFormatting(backgroundColor: Color = .blue) -> some View {
+        modifier(DefaultButtonViewModifier(backgroundColor: backgroundColor))
     }
 }
 
 struct ViewModifierBootcamp: View {
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Text("Hello, world!")
+                .font(.headline)
                 .withDefaultButtonFormatting()
+            
+            Text("Hello, everyone!")
+                .font(.subheadline)
+                .withDefaultButtonFormatting(backgroundColor: .red)
 
         }
+        .padding()
     }
 }
 
